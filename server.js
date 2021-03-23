@@ -3,34 +3,6 @@
 let http = require("http"); // http server core module
 let path = require("path");
 const express = require("express"); // web framework external module
-const MongoClient = require('mongodb').MongoClient;
-//const assert = require('assert');
-
-// Connection URL
-const url = 'mongodb+srv://DAVID00480:@Hurricane3@cluster0.jvdhb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-
-// Database Name
-const dbName = 'myFirstDatabase';
-
-// Create a new MongoClient
-const client = new MongoClient(url);
-
-let check = console.log("Connected successfully to MongoDB server");
-
-function getCheck(){
-    return check;
-}
-
-// Use connect method to connect to the Server
-client.connect(function(err) {
-    //assert.equal(null, err);
-    getCheck();
-
-
-    const db = client.db(dbName);
-
-    client.close();
-});
 // Set process name
 process.title = "networked-aframe-server";
 

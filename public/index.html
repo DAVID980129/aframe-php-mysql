@@ -10,7 +10,7 @@
     <script>
         function refresh_div(qualifiedName, value) {
             jQuery.ajax({
-                url:'http://localhost:63342/unity-aframe-php-mysql-nodejs-mongodb/getdb.php',
+                url:'https://vectorial-capabilit.000webhostapp.com/getdb.php',
                 type:'GET',
                 success:function(results) {
                     jQuery(".result").html(results);
@@ -75,7 +75,7 @@
     <a-entity id="player" position="0 -6.5 0" networked="template:#avatar-template;attachTemplateToLocal:false;" wasd-controls look-controls>
         <a-entity camera="twoway-motion: speed: 35" position="0 7.5 0" >
 <!--            <a-text id="output" class="result" text="value: output;" position="0 2 -2.5"></a-text>-->
-            <a-text id="output" class="result" text="value: output;" position="-2 2 -2.5"></a-text>
+            <a-text id="output" class="result" text="value: output;" position="-2 1 -2.5"></a-text>
 
             <a-entity position="0 0 -3"
                       geometry="primitive: ring; radiusInner: 0.2; radiusOuter: 0.3;"
