@@ -1,0 +1,97 @@
+<html>
+<head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
+    <script src="https://unpkg.com/networked-aframe/dist/networked-aframe.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="../server.js"></script>
+
+    <script>
+        function refresh_div(qualifiedName, value) {
+            jQuery.ajax({
+                url:'http://localhost:63342/unity-aframe-php-mysql-nodejs-mongodb/getdb.php',
+                type:'GET',
+                success:function(results) {
+                    jQuery(".result").html(results);
+                    document.getElementById("output").setAttribute("text", "value",results);
+                }
+            });
+        }
+
+        t = setInterval(refresh_div,1000);
+    </script>
+</head>
+<body>
+<a-scene networked-scene="
+  serverURL: /;
+  app: myApp;
+  room: room1;
+  connectOnLoad: true;
+  onConnect: onConnect;
+  adapter: socketio;
+  audio: false;
+  debug: true;
+">
+    <!-- Avatar -->
+    <template id="avatar-template">
+        <a-entity class="avatar">
+            <a-sphere class="head"
+                      color="#000"
+                      position="0 6 0"
+                      scale="1 1 1"
+                      random-color
+            ></a-sphere>
+            <a-entity class="face"
+                      position="0 6 0"
+            >
+                <a-sphere class="eye"
+                          color="#7f7f7f"
+                          position="-0.004 0.204 -0.618"
+                          scale="0.7 0.4 0.4"
+                >
+                    <a-sphere class="pupil"
+                              color="#54e7eb"
+                              position="0 0.195 -0.816"
+                              scale="0.7 0.2 0.2"
+                    ></a-sphere>
+                </a-sphere>
+                <a-cone class="body"
+                        color="#000"
+                        position="0 -3 -0.235"
+                        rotation="0 0 0"
+                        scale="1 -3.711 1">
+                </a-cone>
+            </a-entity>
+        </a-entity>
+    </template>
+    <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+    <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+    <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+    <a-sky color="blue"></a-sky>
+    <!--  https://www.npmjs.com/package/aframe-crawling-cursor  -->
+    <!--    Player   -->
+    <a-entity id="player" position="0 -6.5 0" networked="template:#avatar-template;attachTemplateToLocal:false;" wasd-controls look-controls>
+        <a-entity camera="twoway-motion: speed: 35" position="0 7.5 0" >
+<!--            <a-text id="output" class="result" text="value: output;" position="0 2 -2.5"></a-text>-->
+            <a-text id="output" class="result" text="value: output;" position="-2 2 -2.5"></a-text>
+
+            <a-entity position="0 0 -3"
+                      geometry="primitive: ring; radiusInner: 0.2; radiusOuter: 0.3;"
+                      material="color: cyan; shader: flat"
+                      cursor="maxDistance: 30; fuse: true"
+                      animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.2 0.2 0.2; to: 1 1 1"
+                      animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.2 0.2 0.2"
+                      animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1">
+            </a-entity>
+            <a-sphere class="head"
+                      visible="true"
+                      random-color
+            ></a-sphere>
+
+        </a-entity>
+    </a-entity>
+</a-scene>
+</body>
+</html>
