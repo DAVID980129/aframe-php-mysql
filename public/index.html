@@ -4,22 +4,23 @@
     <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
     <script src="https://unpkg.com/networked-aframe/dist/networked-aframe.min.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script type="text/javascript" src="../server.js"></script>
 
     <script>
         function refresh_div(qualifiedName, value) {
             jQuery.ajax({
-                url:'https://vectorial-capabilit.000webhostapp.com/getdb.php',
-                type:'GET',
-                success:function(results) {
+                url: 'https://vectorial-capabilit.000webhostapp.com/getdb.php',
+                type: 'GET',
+                success: function (results) {
                     jQuery(".result").html(results);
-                    document.getElementById("output").setAttribute("text", "value",results);
+                    document.getElementById("output").setAttribute("text", "value", results);
                 }
             });
         }
 
-        t = setInterval(refresh_div,1000);
+        t = setInterval(refresh_div, 1000);
     </script>
 </head>
 <body>
@@ -35,28 +36,28 @@
 ">
     <!-- Avatar -->
     <template id="avatar-template">
-        <a-entity class="avatar">
-            <a-sphere class="head"
+        <a-entity className="avatar">
+            <a-sphere className="head"
                       color="#000"
                       position="0 6 0"
                       scale="1 1 1"
                       random-color
             ></a-sphere>
-            <a-entity class="face"
+            <a-entity className="face"
                       position="0 6 0"
             >
-                <a-sphere class="eye"
+                <a-sphere className="eye"
                           color="#7f7f7f"
                           position="-0.004 0.204 -0.618"
                           scale="0.7 0.4 0.4"
                 >
-                    <a-sphere class="pupil"
+                    <a-sphere className="pupil"
                               color="#54e7eb"
                               position="0 0.195 -0.816"
                               scale="0.7 0.2 0.2"
                     ></a-sphere>
                 </a-sphere>
-                <a-cone class="body"
+                <a-cone className="body"
                         color="#000"
                         position="0 -3 -0.235"
                         rotation="0 0 0"
@@ -72,10 +73,11 @@
     <a-sky color="blue"></a-sky>
     <!--  https://www.npmjs.com/package/aframe-crawling-cursor  -->
     <!--    Player   -->
-    <a-entity id="player" position="0 -6.5 0" networked="template:#avatar-template;attachTemplateToLocal:false;" wasd-controls look-controls>
-        <a-entity camera="twoway-motion: speed: 35" position="0 7.5 0" >
-<!--            <a-text id="output" class="result" text="value: output;" position="0 2 -2.5"></a-text>-->
-            <a-text id="output" class="result" text="value: output;" position="-2 1 -2.5"></a-text>
+    <a-entity id="player" position="0 -6.5 0" networked="template:#avatar-template;attachTemplateToLocal:false;"
+              wasd-controls look-controls>
+        <a-entity camera="twoway-motion: speed: 35" position="0 7.5 0">
+            <!--            <a-text id="output" class="result" text="value: output;" position="0 2 -2.5"></a-text>-->
+            <a-text id="output" className="result" text="value: output;" position="-2 2 -2.5"></a-text>
 
             <a-entity position="0 0 -3"
                       geometry="primitive: ring; radiusInner: 0.2; radiusOuter: 0.3;"
@@ -85,7 +87,7 @@
                       animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.2 0.2 0.2"
                       animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1">
             </a-entity>
-            <a-sphere class="head"
+            <a-sphere className="head"
                       visible="true"
                       random-color
             ></a-sphere>
